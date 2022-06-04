@@ -104,9 +104,7 @@
               <div class="card-icons">
                 <div @click="edit(usuario)"><img src="@/assets/icons/edit.png" alt="edit"></div>
                 <div @click="remove(usuario)"><img src="@/assets/icons/delete.png" alt="remove"></div>
-                <router-link :to="'/usuarios/' + usuario.id">
-                  <img src="@/assets/icons/view.png" alt="view">
-                </router-link>
+                <img @click="view(usuario)" src="@/assets/icons/view.png" alt="view">
               </div>
             </div>
           </div>
@@ -269,6 +267,9 @@ export default {
       }
     }
   },
+  created(){
+    this.$store.dispatch("getUsuariosReqres");
+  },
   computed: {
     usuarios: {
       get() {
@@ -336,6 +337,10 @@ export default {
         avatar: "",
       })
       this.createUsuario = !this.createUsuario
+    },
+    async view(usuario){
+      await this.$store.dispatch("setUsuarioLocal", usuario);
+      this.$router.push(`/usuarios/${usuario.id}`)
     }
   }
 };

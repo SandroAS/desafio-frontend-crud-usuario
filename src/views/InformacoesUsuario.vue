@@ -43,37 +43,30 @@
 </template>
 
 <script>
-import axios from "./../../axios";
 export default {
   name: "CrudUsuarios",
-  data () {
-    return {
-      support: {
-        text: "",
-        url: ""
-      },
-      usuario: {
-        id: 0,
-        email: "",
-        first_name: "",
-        last_name: "",
-        avatar: "",
-      }
-    }
-  },
   created() {
     this.usuario = this.$store.getters.getUsuarios.find(u => u.id === parseInt(this.$route.params.id));
     if(this.usuario.avatar.split('/')[this.usuario.avatar.split('/').length - 1] !== 'avatar.png') {
-      axios.get(`/users/${this.$route.params.id}`)
-      .then((response) => {
-        this.usuario = response.data.data;
-        this.support = response.data.support;
-      }, (error) => {
-        console.error(error)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+      this.$store.dispatch("getUsuarioReqres", this.$route.params.id);
+    }
+  },
+  computed: {
+    usuario: {
+      get() {
+        return this.$store.getters.getUsuario;
+      },
+      set(value) {
+        return value;
+      }
+    },
+    support: {
+      get() {
+        return this.$store.getters.getSupport;
+      },
+      set(value) {
+        return value;
+      }
     }
   }
 }
