@@ -16,68 +16,24 @@
           <input type="text" v-model="usuario.first_name">
         </div>
         <div class="form-function">
-          <div class="form-label function-lable"><label>Função do usuário</label></div>
-          <dir class="arrow"><img class="arrow-icon" src="@/assets/icons/arrow-down.png" alt=""></dir>
-          <select name="select" v-model="usuario.email">
-            <option selected disabled>Selecione a função</option>
-            <option value="Desenvolvedor">Desenvolvedor</option>
-            <option value="Gerente de Projetos">Gerente de Projetos</option>
-            <option value="Tech Lead">Tech Lead</option>
-            <option value="UI/UX Designer">UI/UX Designer</option>
-          </select>
-          <!-- <div class="select-box">
+          <div class="form-label">
+            <label>Função do usuário</label>
+          </div>
+          <div class="select-box">
             <div :class="'options-container ' + active">
-              <div class="option" @click="selected = 'Automobiles'">
-                <input type="radio" class="radio" id="automobiles" name="category"/>
-                <label for="automobiles">Automobiles</label>
-              </div>
-
-              <div class="option" @click="selected = 'Film & Animation'">
-                <input type="radio" class="radio" id="film" name="category" />
-                <label for="film">Film & Animation</label>
-              </div>
-
-              <div class="option" @click="selected = 'Science & Technology'">
-                <input type="radio" class="radio" id="science" name="category" />
-                <label for="science">Science & Technology</label>
-              </div>
-
-              <div class="option" @click="selected = 'Art'">
-                <input type="radio" class="radio" id="art" name="category" />
-                <label for="art">Art</label>
-              </div>
-
-              <div class="option" @click="selected = 'Music'">
-                <input type="radio" class="radio" id="music" name="category" />
-                <label for="music">Music</label>
-              </div>
-
-              <div class="option" @click="selected = 'Travel & Events'">
-                <input type="radio" class="radio" id="travel" name="category" />
-                <label for="travel">Travel & Events</label>
-              </div>
-
-              <div class="option" @click="selected = 'Sports'">
-                <input type="radio" class="radio" id="sports" name="category" />
-                <label for="sports">Sports</label>
-              </div>
-
-              <div class="option" @click="selected = 'News & Politics'">
-                <input type="radio" class="radio" id="news" name="category" />
-                <label for="news">News & Politics</label>
-              </div>
-
-              <div class="option" @click="selected = 'Tutorials'">
-                <input type="radio" class="radio" id="tutorials" name="category" />
-                <label for="tutorials">Tutorials</label>
+              <div v-for="cargo in cargos" :key="cargo" 
+                class="option" 
+                @click="selectJob(cargo)"
+              >
+                <input type="radio" class="radio" :id="cargo" name="cargos"/>
+                <label class="label-cargos" :for="cargo">{{ cargo }}</label>
               </div>
             </div>
 
-            <div class="selected" @click="active === '' ? active = 'active' : active = ''">
-              {{ selected }}
+            <div :class="selectedClass()" @click="active === '' ? active = 'active' : active = ''">
+              {{ usuario.email }}
             </div>
-          </div> -->
-        
+          </div>
         </div>
         <div>
           <button class="btn-save" @click="save()">Salvar dados do usuário</button>
@@ -127,15 +83,23 @@
             <input type="text" v-model="usuario.first_name">
           </div>
           <div class="form-function">
-            <div class="form-label function-lable"><label>Função do usuário</label></div>
-            <dir class="arrow"><img class="arrow-icon" src="@/assets/icons/arrow-down.png" alt=""></dir>
-            <select name="select" v-model="usuario.email">
-              <option selected disabled>Selecione a função</option>
-              <option value="Desenvolvedor">Desenvolvedor</option>
-              <option value="Gerente de Projetos">Gerente de Projetos</option>
-              <option value="Tech Lead">Tech Lead</option>
-              <option value="UI/UX Designer">UI/UX Designer</option>
-            </select>        
+            <div class="form-label function-lable">
+              <label>Função do usuário</label>
+            </div>
+            <div class="select-box">
+              <div :class="'options-container ' + active">
+                <div v-for="cargo in cargos" :key="cargo" 
+                  class="option" 
+                  @click="selectJob(cargo)"
+                >
+                  <input type="radio" class="radio" :id="cargo" name="cargos"/>
+                  <label class="label-cargos" :for="cargo">{{ cargo }}</label>
+                </div>
+              </div>
+              <div :class="selectedClass()" @click="active === '' ? active = 'active' : active = ''">
+                {{ usuario.email }}
+              </div>
+            </div>
           </div>
           <div>
             <button class="btn-save" @click="save()">Salvar dados do usuário</button>
@@ -160,93 +124,121 @@
 //     optionsContainer.classList.remove("active");
 //   });
 // });
-
-// <style>
-//   .select-box {
-//     display: flex;
-//     width: 100%;
-//     flex-direction: column;
-//   }
-
-//   .select-box .options-container {
-//     background: #2f3640;
-//     color: #f5f6fa;
-//     max-height: 0;
-//     width: 100%;
-//     opacity: 0;
-//     transition: all 0.4s;
-//     border-radius: 8px;
-//     overflow: hidden;
-
-//     order: 1;
-//   }
-
-//   .selected {
-//     background: #2f3640;
-//     border-radius: 8px;
-//     margin-bottom: 8px;
-//     color: #f5f6fa;
-//     position: relative;
-
-//     order: 0;
-//   }
-
-//   .selected::after {
-//     content: "";
-//     background: url("icon/arrow-down.png");
-//     background-size: contain;
-//     background-repeat: no-repeat;
-
-//     position: absolute;
-//     height: 100%;
-//     width: 17px;
-//     right: 10px;
-//     top: 5px;
-
-//     transition: all 0.4s;
-//   }
-
-//   .select-box .options-container.active {
-//     max-height: 240px;
-//     opacity: 1;
-//     overflow-y: scroll;
-//   }
-
-//   .select-box .options-container.active + .selected::after {
-//     transform: rotateX(180deg);
-//     top: -6px;
-//   }
-
-//   .select-box .options-container::-webkit-scrollbar {
-//     width: 8px;
-//     background: #0d141f;
-//     border-radius: 0 8px 8px 0;
-//   }
-
-//   .select-box .options-container::-webkit-scrollbar-thumb {
-//     background: #525861;
-//     border-radius: 0 8px 8px 0;
-//   }
-
-//   .select-box .option,
-//   .selected {
-//     padding: 12px 24px;
-//     cursor: pointer;
-//   }
-
-//   .select-box .option:hover {
-//     background: #414b57;
-//   }
-
-//   .select-box label {
-//     cursor: pointer;
-//   }
-
-//   .select-box .option .radio {
-//     display: none;
-//   }
-// </style>
 </script>
+<style>
+  .select-box {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .select-box .options-container {
+    background: #fff;
+    max-height: 0;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.4s;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.05);
+
+    order: 1;
+  }
+
+  .disabled  {
+    color: #797979 !important;
+  }
+
+  .selected {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+
+    background: transparent;
+    color: #000;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 55px;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+  }
+
+  .selected::after {
+    display: flex;
+    align-items: center;
+    content: url("icon/arrow-down.png");
+
+    position: absolute;
+    height: 100%;
+    width: 17px;
+    right: 21px;
+    top: 0px;
+
+    transition: all 0.4s;
+  }
+
+  .select-box .options-container.active {
+    max-height: 140px;
+    opacity: 1;
+    overflow-y: scroll;
+  }
+
+  .select-box .options-container.active + .selected::after {
+    transform: rotateX(180deg);
+    top: 0px;
+  }
+
+  .select-box .options-container::-webkit-scrollbar {
+    width: 8px;
+    background: #797979;
+    border-radius: 0 5px 5px 0;
+  }
+
+  .select-box .options-container::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 0 5px 5px 0;
+  }
+
+  .label-cargos {
+    font-family: 'Montserrat' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    line-height: 18px !important;
+    letter-spacing: 0.2px !important;
+  }
+
+  .select-box .option,
+  .selected {
+    padding: 12px 24px;
+    cursor: pointer;
+  }
+
+  .option {
+    padding: 11.18px 24px !important;
+  }
+
+  .select-box .option:hover {
+    background: #F7F7F7;
+  }
+
+  .select-box label {
+    cursor: pointer;
+  }
+
+  .select-box .option .radio {
+    display: none;
+  }
+</style>
 
 <script>
 export default {
@@ -256,11 +248,16 @@ export default {
       createUsuario: false,
       dialog: false,
       active: "",
-      selected: 'Selecione uma categoria',
       editIndex: -1,
+      cargos: [
+        'Desenvolvedor',
+        'Gerente de Projetos',
+        'Tech Lead',
+        'UI/UX Designer'
+      ],
       usuario: {
         id: 0,
-        email: "",
+        email: 'Selecione a função',
         first_name: "",
         last_name: "",
         avatar: "",
@@ -298,6 +295,15 @@ export default {
 
       this.usuario.first_name = first_name;
       this.usuario.last_name = last_name;
+    },
+    selectedClass() {
+      let classe = "";
+      classe = this.usuario.email === 'Selecione a função' ? 'selected ' + 'disabled' : 'selected'
+      return classe
+    },
+    selectJob(cargo) {
+      this.usuario.email = cargo;
+      this.active = "";
     },
     async save() {
       this.confgName();
@@ -597,6 +603,7 @@ li {
   color: #000000;
 }
 
+/* arrancar */
  select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -618,6 +625,7 @@ li {
     color: #797979;
  }
 
+/* arrancar */
  select::-ms-expand {
    display: none;
  }
@@ -628,6 +636,7 @@ li {
     margin-bottom: 24px;
  }
 
+/* arrancar */
  .arrow {
    margin: 0 20px 0 0;
    padding: 0;
@@ -636,13 +645,10 @@ li {
    float: right;
  }
 
+/* arrancar */
  .arrow-icon {
    margin-bottom: -37px;
  }
-
-.function-lable {
-  margin-bottom: 1.22px;
-}
 
 .btn-save {
   width: 100%;
