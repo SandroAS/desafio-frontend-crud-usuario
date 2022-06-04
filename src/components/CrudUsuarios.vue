@@ -299,16 +299,17 @@ export default {
       this.usuario.first_name = first_name;
       this.usuario.last_name = last_name;
     },
-    save() {
+    async save() {
       this.confgName();
-      this.editIndex = this.usuarios.indexOf(this.usuarios.find(u => u.id === this.usuario.id));
       if(this.editIndex === -1) {
         this.usuario.id = this.usuarios[this.usuarios.length - 1].id + 1;
         this.usuario.avatar = 'http://localhost:8080/assets/img/avatar.png';
-        this.usuarios.push(Object.assign({}, this.usuario));
+        await this.$store.dispatch("createUsuario", this.usuario);
+        // this.usuarios.push(Object.assign({}, this.usuario)); // utilizado antes de implementar o axios
         this.createUsuario = false;
       } else {
-        this.usuarios.splice(this.editIndex, 1, Object.assign({}, this.usuario));
+        await this.$store.dispatch("editUsuario", this.usuario);
+        // this.usuarios.splice(this.editIndex, 1, Object.assign({}, this.usuario)); // utilizado antes de implementar o axios
         this.dialog = false;
       }
       this.usuario = Object.assign({}, {
@@ -322,11 +323,13 @@ export default {
     edit(usuario) {
       this.usuario = Object.assign({},usuario);
       this.usuario.first_name = this.usuario.first_name + ' ' + this.usuario.last_name;
+      this.editIndex = this.usuarios.indexOf(this.usuarios.find(u => u.id === this.usuario.id));
       this.dialog = true;
     },
-    remove(usuario) {
-      const index = this.usuarios.indexOf(usuario)
-      this.usuarios.splice(index, 1);
+    async remove(usuario) {
+      await this.$store.dispatch("deleteUsuario", usuario);
+      // const index = this.usuarios.indexOf(usuario) // utilizado antes de implementar o axios
+      // this.usuarios.splice(index, 1); // utilizado antes de implementar o axios
     },
     close() {
       this.usuario = Object.assign({}, {
