@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="view-header">
+    <div class="header">
       <h1 class="title">#{{ usuario.id }}</h1>
       <router-link to="/">
         <button class="btn-secondary">
@@ -8,7 +8,7 @@
         </button>
       </router-link>
     </div>
-    <div class="content">
+    <div class="d-flex align-item-center">
       <div class="usario-avatar">
         <img :src="usuario.avatar" :alt="usuario.first_name">
       </div>
@@ -21,7 +21,7 @@
         <p class="data">{{ usuario.last_name }}</p>
       </div>
     </div>
-    <div class="more-content">
+    <div>
       <div class="information">
         <p class="label">Endereço de e-mail</p>
         <p class="data">{{ usuario.email }}</p>
@@ -73,54 +73,10 @@ export default {
 </script>
 
 <style scoped>
-.view-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.title {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 50px;
-  line-height: 61px;
-
-  letter-spacing: 0.2px;
-}
-
-.btn-secondary {
-  width: 185px;
-  height: 55px;
-
-  cursor: pointer;
-
-  background: #F7F7F7;
-  border-color: transparent;
-  border-radius: 5px;
-
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 18px;
-  letter-spacing: 0.2px;
-}
-
-.btn-secondary:hover {
-  background: #e5e5e5;
-}
-
 img {
   width: 120px;
   height: 120px;
-
   border-radius: 5px;
-}
-
-.content {
-  display: flex;
-  align-items: center;
 }
 
 .usario-first-name {
@@ -132,24 +88,14 @@ img {
 }
 
 .label {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-
-  letter-spacing: 0.2px;
-
   color: #797979;
 }
 
 .data {
-  font-family: 'Montserrat';
-  font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
-
-  letter-spacing: 0.2px;
 }
 </style>

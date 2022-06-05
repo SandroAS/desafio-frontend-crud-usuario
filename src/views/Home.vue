@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <CrudUsuarios />
-    <!-- <router-link to="/about">InformacoesUsuario</router-link> -->
-
   </div>
 </template>
 
