@@ -103,7 +103,6 @@ export default {
     },
     async save() {
       this.confgName();
-      console.log(urls.localURL)
       if(this.editIndex === -1) {
         this.usuarioLocal.id = this.usuarios[this.usuarios.length - 1].id + 1;
         this.usuarioLocal.avatar = `${urls.localURL}/assets/img/avatar.png`;

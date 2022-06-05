@@ -44,11 +44,16 @@
 
 <script>
 export default {
-  name: "CrudUsuarios",
+  name: "InformacoesUsuario",
   created() {
-    this.usuario = this.$store.getters.getUsuarios.find(u => u.id === parseInt(this.$route.params.id));
-    if(this.usuario.avatar.split('/')[this.usuario.avatar.split('/').length - 1] !== 'avatar.png') {
-      this.$store.dispatch("getUsuarioReqres", this.$route.params.id);
+    // if(this.usuario)
+    if(this.usuario.avatar === undefined) {
+      this.$store.dispatch("getUsuarioReqres", this.$route.params.id)
+    } else {
+      this.usuario = this.$store.getters.getUsuarios.find(u => u.id === parseInt(this.$route.params.id));
+      if(this.usuario.avatar.split('/')[this.usuario.avatar.split('/').length - 1] !== 'avatar.png') {
+        this.$store.dispatch("getUsuarioReqres", this.$route.params.id);
+      }
     }
   },
   computed: {
