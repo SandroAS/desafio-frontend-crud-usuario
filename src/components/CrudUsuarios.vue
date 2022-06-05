@@ -47,25 +47,27 @@
         </li>
       </ul>
     </div>
-    <!-- Modal -->
-    <div v-if="dialog" class="w-100 modal">
+    <transition name="fade">
+      <!-- Modal -->
+      <div v-if="dialog" class="w-100 modal">
 
-      <!-- Modal content -->
-      <div class="radius-5 modal-content">
-        <div class="d-flex justify-content-between align-item-center">
-          <h1 class="modal-title">Editar Usuário</h1>
-          <span class="close" @click="dialog = !dialog">&times;</span>
+        <!-- Modal content -->
+        <div v-if="dialog" class="radius-5 modal-content">
+          <div class="d-flex justify-content-between align-item-center">
+            <h1 class="modal-title">Editar Usuário</h1>
+            <span class="close" @click="dialog = !dialog">&times;</span>
+          </div>
+          <hr>
+          <Formulario
+            :usuario="usuario"
+            :cargos="cargos"
+            :editIndex="editIndex"
+            @close-form="closeForm()"
+          />
         </div>
-        <hr>
-        <Formulario
-          :usuario="usuario"
-          :cargos="cargos"
-          :editIndex="editIndex"
-          @close-form="closeForm()"
-        />
-      </div>
 
-    </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -168,6 +170,14 @@ export default {
   100% {
     transform: translateY(0px);
   }
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
 }
 /* -------------- */
 
