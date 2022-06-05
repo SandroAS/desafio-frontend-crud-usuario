@@ -105,7 +105,7 @@ export default {
       this.confgName();
       if(this.editIndex === -1) {
         this.usuarioLocal.id = this.usuarios[this.usuarios.length - 1].id + 1;
-        this.usuarioLocal.avatar = `${urls.localURL}/assets/img/avatar.png`;
+        this.usuarioLocal.avatar = `${urls.servidorNetlifyURL}/assets/img/avatar.png`;
         await this.$store.dispatch("createUsuario", this.usuarioLocal);
         // this.usuarios.push(Object.assign({}, this.usuario)); // utilizado antes de implementar o axios
       } else {
