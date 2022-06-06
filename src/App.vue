@@ -5,7 +5,7 @@
 </template>
 
 <style>
-#app, input {
+#app, input, .btn-primary, .btn-secondary {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
